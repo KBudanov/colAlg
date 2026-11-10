@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Підготовка до колоквіуму з алгебри та геометрії: 43 питання, калькулятор варіанту, скелети доведень і тренувальні картки.">
+  <meta name="theme-color" content="#1f6fd1">
+  <title>Колоквіум з алгебри та геометрії</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=full-answers-2">
+  <script>
+    try { const theme = localStorage.getItem('algebra-theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch (_) {}
+    window.MathJax = {
+      tex: {inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']]},
+      svg: {fontCache: 'local'}, options: {enableMenu: false},
+      startup: {typeset: false}
+    };
+  </script>
+  <script defer src="./assets/mathjax.js"></script>
+  <script defer src="./variant.js"></script>
+  <script defer src="./questions.js"></script>
+  <script defer src="./app.js?v=full-answers-2"></script>
+</head>
+<body>
+<a class="skip" href="#pickTitle">До мого варіанту</a>
+<header class="bar">
+  <div class="wrap">
+    <div class="name">Колоквіум · алгебра</div>
+    <div class="timer" id="timer" role="timer" aria-label="Залишок часу підготовки">7:00</div>
+    <button id="tStart" class="primary" type="button">Старт 7 хв</button>
+    <button id="tReset" type="button">Скинути</button>
+    <button id="trainBtn" type="button" aria-pressed="false">Тренування</button>
+    <button id="copyBtn" type="button" aria-pressed="false">Режим «7 хвилин»</button>
+    <button id="themeBtn" type="button" aria-label="Змінити колірну тему">Тема ◐</button>
+  </div>
+</header>
+<main class="wrap">
+  <h1>Колоквіум з алгебри та геометрії</h1>
+  <p class="lead">Отримав номер варіанту? Введи його — і відразу побачиш свої шість завдань. За <b>7 хвилин</b> перепиши умови, значення для прикладів та <b>скелети</b> відповідей. Для підготовки є повні пояснення і тренувальні картки.</p>
+  <noscript><div class="panel">Увімкни JavaScript, щоб побачити питання й користуватися калькулятором.</div></noscript>
+
+  <div class="flow hero-extra">
+    <div><b>2 завдання</b><span>Nivel 1 · означення</span></div>
+    <div><b>2 завдання</b><span>Nivel 2 · приклади</span></div>
+    <div><b>1 завдання</b><span>Nivel 3 · доведення</span></div>
+    <div><b>1 завдання</b><span>Nivel 4 · доведення</span></div>
+  </div>
+
+  <section class="panel" aria-labelledby="pickTitle">
+    <h2 id="pickTitle" tabindex="-1">Мій варіант</h2>
+    <p>Введи k від 1 до 100. Калькулятор визначить номери за формулою mod* та підставить твої значення в Nivel 2.</p>
+    <form id="variantForm" novalidate>
+      <label for="variantInput">Номер варіанту k</label>
+      <div class="variant-controls">
+        <input id="variantInput" name="variant" type="number" min="1" max="100" step="1" inputmode="numeric" placeholder="Наприклад, 49" aria-describedby="variantError" required>
+        <button class="primary" type="submit">Розрахувати</button>
+        <button id="calcStart" type="button">Розрахувати + старт 7 хв</button>
+      </div>
+      <p id="variantError" class="error" role="alert" hidden></p>
+    </form>
+    <div id="variantResult" class="variant-result" aria-live="polite" hidden></div>
+    <details class="formula-help">
+      <summary>Як працює mod* і як визначаються завдання?</summary>
+      <p><b>a mod* b</b> — звичайний залишок від ділення, але замість 0 отримуємо b. Для додатних цілих: <code>((a − 1) % b) + 1</code>.</p>
+      <p>15 mod* 2 = 1; 15 mod* 3 = 3; 15 mod* 4 = 3; 15 mod* 5 = 5; 3 mod* 7 = 3.</p>
+      <ul class="tips">
+        <li><b>Nivel 1:</b> k mod* 23 та (k + 12) mod* 23.</li>
+        <li><b>Nivel 2:</b> k mod* 9 та (k + 5) mod* 9.</li>
+        <li><b>Nivel 3:</b> k mod* 7.</li>
+        <li><b>Nivel 4:</b> k mod* 4.</li>
+      </ul>
+      <p>Для <b>k = 49</b>: N1 — 3 і 15; N2 — 4 і 9; N3 — 7; N4 — 1.</p>
+    </details>
+    <p class="trap"><b>Уточнення до прикладу:</b> 49 mod* 4 = 1, бо 49 = 12 × 4 + 1. У наданому тексті для N4 помилково вказано 3; за формулою правильне завдання — №1.</p>
+    <p class="picker-note">Або обери номери вручну: по два в N1 і N2, по одному в N3 і N4.</p>
+    <div class="row"><div class="lv">N1</div><div class="chips" data-level="1" role="group" aria-label="Питання Nivel 1"></div></div>
+    <div class="row"><div class="lv">N2</div><div class="chips" data-level="2" role="group" aria-label="Питання Nivel 2"></div></div>
+    <div class="row"><div class="lv">N3</div><div class="chips" data-level="3" role="group" aria-label="Питання Nivel 3"></div></div>
+    <div class="row"><div class="lv">N4</div><div class="chips" data-level="4" role="group" aria-label="Питання Nivel 4"></div></div>
+    <div class="actions">
+      <button id="showSel" class="primary" type="button">Показати скелети</button>
+      <button id="rand" type="button">Випадковий варіант (тренування)</button>
+      <button id="clear" type="button">Очистити</button>
+    </div>
+    <p id="selectionStatus" class="side" aria-live="polite"></p>
+  </section>
+
+  <section class="panel hero-extra" aria-labelledby="planTitle">
+    <h2 id="planTitle">План на 7 хвилин</h2>
+    <ol class="tips">
+      <li><b>Отримай свій варіант.</b> Введи k, натисни «Розрахувати + старт 7 хв». Час іде одразу після отримання номера.</li>
+      <li><b>Перепиши умови.</b> Для N2 не забудь конкретні значення, розраховані за твоїм k.</li>
+      <li><b>N4 → N3.</b> Випиши формули та основні кроки доведень. Там, де вимагається, доведи в обидва боки.</li>
+      <li><b>N2 → N1.</b> Запиши конструкції прикладів та означення.</li>
+      <li><b>Перевір нюанси.</b> Оранжеві блоки підказують, які умови й обмеження легко пропустити.</li>
+    </ol>
+  </section>
+
+  <div id="copyHead">
+    <h2>Скелети мого варіанту</h2>
+    <button id="editVariant" class="primary" type="button">← Змінити номери завдань</button>
+    <button id="printBtn" type="button">Друкувати / зберегти PDF</button>
+    <button id="copyFullBtn" type="button" aria-pressed="false" aria-controls="copyList">Показати повні відповіді</button>
+    <p>Порядок: N4 → N3 → N2 → N1. Кнопка «Показати повні відповіді» розгортає доведення N3 та N4 разом; кожну відповідь також можна відкрити окремо. Умови й значення N2 залишаються поруч зі скелетами.</p>
+  </div>
+  <div id="copyList"></div>
+
+  <section id="trainer" aria-labelledby="trTitle">
+    <div class="panel">
+      <h2 id="trTitle">Тренування</h2>
+      <p>Відповідай уголос або на папері, потім відкривай відповідь та оціни себе. «Не знаю» повернеться через 3 картки, «Частково» — через 7. Прогрес зберігається в цьому браузері.</p>
+      <div class="row"><div class="lv">Що</div><div class="tchips" id="trLv" role="group" aria-label="Рівні тренування"></div></div>
+      <div class="row"><div class="lv">Як</div><div class="tchips" id="trMode" role="group" aria-label="Режим тренування"></div></div>
+      <div class="tr-stats" id="trStats"></div>
+      <div class="actions"><button id="trRestart" type="button">Перемішати заново</button><button id="trReset" type="button">Скинути прогрес</button></div>
+      <p class="kbd">Клавіші: пробіл = показати відповідь, 1 = не знаю, 2 = частково, 3 = знаю</p>
+    </div>
+    <div id="trArea"></div>
+  </section>
+
+  <div class="levels" id="levels"></div>
+  <footer class="site-footer hero-extra">
+    <p>Умови з наданих фото: <a href="./kol1.jpeg" target="_blank" rel="noopener">Nivel 1</a> · <a href="./kol2.jpeg" target="_blank" rel="noopener">Nivel 2</a> · <a href="./kol4.jpeg" target="_blank" rel="noopener">Nivel 3 та 4</a>.</p>
+    <p>Означення, нумерацію властивостей і доведення узгоджено з PDF лекцій. Приклади Nivel 2 — перевірені авторські побудови за лекційними означеннями.</p>
+  </footer>
+</main>
+<div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+</body>
+</html>
